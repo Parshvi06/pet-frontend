@@ -34,13 +34,8 @@ const Navbar = () => {
           <div className="md:col-span-4">
             <Link href="/" className="flex-none rounded-xl text-xl inline-block font-semibold">
               <div className='flex justify-align'>
-                <Image
-                  src="/logo.png" // ✅ Public folder me hona chahiye
-                  alt="Logo"
-                  width={120}   // height-width adjust karo
-                  height={120}
-                  className="mr-2"
-                />
+                <img src="/logo.png" alt="Logo" className="h-10 w-auto mr-3" />
+
                 <span className="text-2xl font-bold text-lime-500 my-8">
                   WaggingTails Hub
                 </span>
