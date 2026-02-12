@@ -80,7 +80,8 @@ const Footer = () => {
               eBook
             </a>
             <a className="text-gray-600 hover:text-gray-800" href="#">
-              What's New
+              What&apos;s New
+
             </a>
           </div>
         </div>
