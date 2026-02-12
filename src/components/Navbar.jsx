@@ -1,83 +1,102 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
-import { useState, useEffect } from 'react';
-import Image from 'next/image'; // ✅ Next.js image component use kiya
+import { usePathname, useRouter } from 'next/navigation';
+import React, { useState, useEffect } from 'react';
+import Image from 'next/image'; // ✅ Next.js Image component
 
 const Navbar = () => {
+  const path = usePathname();
+  const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const storedUser = localStorage.getItem('user');
-      if (storedUser) {
-        setUser(JSON.parse(storedUser));
-      }
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
     }
   }, []);
 
   const handleLogout = () => {
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setUser(null);
-    window.location.href = '/login';
+    router.push("/");
   };
 
   return (
-    <nav className="bg-lime-500 text-white px-6 py-4 flex justify-between items-center shadow-md">
-      {/* Logo */}
-      <div className="flex items-center">
-        <Link href="/">
-          <Image
-            src="/logo.png" // ✅ Public folder ke liye slash se start
-            alt="Logo"
-            width={40}   // width set karo
-            height={40}  // height set karo
-            className="mr-3"
-          />
-        </Link>
-        <Link href="/" className="text-xl font-bold">
-          Pet Adoption
-        </Link>
-      </div>
-
-      {/* Navigation Links */}
-      <div className="flex items-center space-x-6">
-        <Link href="/aboutUs" className="hover:underline">
-          About Us
-        </Link>
-        <Link href="/blog" className="hover:underline">
-          Blog
-        </Link>
-        <Link href="/explorePets" className="hover:underline">
-          Explore Pets
-        </Link>
-
-        {user ? (
-          <>
-            <span className="font-semibold">{user.name}</span>
-            <button
-              onClick={handleLogout}
-              className="bg-white text-lime-500 px-3 py-1 rounded hover:bg-gray-100 transition"
-            >
-              Logout
-            </button>
-          </>
-        ) : (
-          <>
-            <Link href="/login" className="hover:underline">
-              Login
+    <>
+      <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7 bg-white">
+        <nav className="relative w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-2 md:px-2 lg:px-4 mx-auto">
+          
+          {/* Logo */}
+          <div className="md:col-span-4">
+            <Link href="/" className="flex-none rounded-xl text-xl inline-block font-semibold">
+              <div className='flex justify-align'>
+                <Image
+                  src="/logo.png" // ✅ Public folder me hona chahiye
+                  alt="Logo"
+                  width={120}   // height-width adjust karo
+                  height={120}
+                  className="mr-2"
+                />
+                <span className="text-2xl font-bold text-lime-500 my-8">
+                  WaggingTails Hub
+                </span>
+              </div>
             </Link>
-            <Link
-              href="/signup"
-              className="bg-white text-lime-500 px-3 py-1 rounded hover:bg-gray-100 transition"
-            >
-              Signup
-            </Link>
-          </>
-        )}
-      </div>
-    </nav>
+          </div>
+
+          {/* Menu */}
+          <div className="hidden md:flex md:items-center md:col-span-5">
+            <ul className="flex space-x-8 text-center">
+              <li><Link href="/explorePets" className="text-black text-xl font-bold">Pet Catalog</Link></li>
+              <li><Link href="/addPet" className="text-black font-bold text-xl">Pet Addition</Link></li>
+              <li><Link href="/" className="text-black font-bold text-xl">Home</Link></li>
+              <li><Link href="/aboutUs" className="text-black font-bold text-xl">About Us</Link></li>
+              <li><Link href="/contact" className="text-black font-bold text-xl">Contact</Link></li>
+            </ul>
+          </div>
+
+          {/* RIGHT SIDE BUTTONS */}
+          <div className="flex items-center gap-x-3 ms-auto md:col-span-3">
+
+            {user ? (
+              <>
+                <span className="text-black font-semibold text-lg">
+                  Hello, {user.name}
+                </span>
+
+                <button
+                  onClick={handleLogout}
+                  className="py-2 px-3 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  href="/signup"
+                  className="py-2 px-3 font-medium rounded-xl bg-black text-lime-400 hover:bg-lime-500 hover:text-white transition"
+                >
+                  Sign Up
+                </Link>
+
+                <Link
+                  href="/login"
+                  className="py-2 px-3 font-medium rounded-xl bg-lime-400 text-black hover:bg-lime-500 transition"
+                >
+                  Login
+                </Link>
+              </>
+            )}
+
+          </div>
+        </nav>
+      </header>
+    </>
   );
 };
 
