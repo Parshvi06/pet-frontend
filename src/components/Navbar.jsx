@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import React from 'react';
 import { useState, useEffect } from 'react';
+import Image from 'next/image'; // ✅ Next.js image component use kiya
 
 const Navbar = () => {
   const [user, setUser] = useState(null);
@@ -27,7 +28,13 @@ const Navbar = () => {
       {/* Logo */}
       <div className="flex items-center">
         <Link href="/">
-          <img src="/logo.png" alt="Logo" className="h-10 w-auto mr-3" />
+          <Image
+            src="/logo.png" // ✅ Public folder ke liye slash se start
+            alt="Logo"
+            width={40}   // width set karo
+            height={40}  // height set karo
+            className="mr-3"
+          />
         </Link>
         <Link href="/" className="text-xl font-bold">
           Pet Adoption
