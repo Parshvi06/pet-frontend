@@ -46,7 +46,7 @@ const Home = () => {
           </div>
           <div className="flex flex-col items-center justify-center p-4 md:p-6 z-10">
             <h1 className="text-3xl md:text-4xl font-extrabold mb-4 text-black">INTRODUCE A PET</h1>
-            <p className="text-base md:text-xl mb-6 text-black">"Give them a chance to find their forever home!"</p>
+            <p className="text-base md:text-xl mb-6 text-black">&quot;Give them a chance to find their forever home!&quot;</p>
             <Link href="/addPet" className="bg-white text-black px-6 py-3 rounded-lg shadow-lg hover:bg-lime-600 transition">Add</Link>
           </div>
         </div>
@@ -66,7 +66,7 @@ const Home = () => {
             <div className="p-4 md:p-6 bg-gradient-to-r from-green-200 via-lime-300 to-yellow-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl flex items-center">
               <div>
                 <h3 className="text-2xl md:text-3xl font-bold mb-4 text-black">Pet Matching</h3>
-                <p className="text-base md:text-black">We'll help you find the perfect pet that fits your lifestyle and needs.</p>
+                <p className="text-base md:text-black">We&apos;ll help you find the perfect pet that fits your lifestyle and needs.</p>
               </div>
             </div>
             <div className="p-4 md:p-6 bg-gradient-to-r from-green-200 via-lime-300 to-yellow-200 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl flex items-center">
@@ -79,14 +79,13 @@ const Home = () => {
         </div>
       </section>
 
-     
       {/* Call to Action Section */}
       <section className="relative h-72 md:h-96 bg-cover bg-center" style={{ backgroundImage: 'url(https://thumbs.dreamstime.com/b/dog-dry-food-pet-background-close-up-dog-dry-food-pet-background-close-up-205108551.jpg)' }}>
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black to-transparent opacity-50"></div>
         <div className="relative z-10 h-full flex flex-col items-center justify-center text-center text-white px-4 md:px-6">
           <h1 className="text-3xl md:text-5xl font-extrabold mb-4">#AdoptLove</h1>
-          <p className="text-base md:text-lg mb-6">Approximately 1478 dogs & cats die every day on roads in India. Let’s start a mission to provide every dog and cat a home before 2035. Join us in setting up pet houses in your surrounding for strays!</p>
-          <a href="/explorePets" className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition">Adopt, Don't Shop!</a>
+          <p className="text-base md:text-lg mb-6">Approximately 1478 dogs &amp; cats die every day on roads in India. Let&apos;s start a mission to provide every dog and cat a home before 2035. Join us in setting up pet houses in your surrounding for strays!</p>
+          <a href="/explorePets" className="bg-orange-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition">Adopt, Don&apos;t Shop!</a>
         </div>
       </section>
 
@@ -96,15 +95,15 @@ const Home = () => {
           <h2 className="text-3xl md:text-4xl font-extrabold mb-8 md:mb-12 text-white">What Our Adopters Say</h2>
           <div className="flex flex-wrap justify-center gap-6 md:gap-8">
             <div className="p-4 md:p-6 bg-gradient-to-r from-red-200 via-yellow-300 to-lime-400 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl w-full md:w-1/3">
-              <p className="text-base md:text-lg text-black-700 mb-4">"Adopting our dog through this service was a wonderful experience. The staff were incredibly supportive and kind!"</p>
+              <p className="text-base md:text-lg text-black-700 mb-4">&quot;Adopting our dog through this service was a wonderful experience. The staff were incredibly supportive and kind!&quot;</p>
               <h4 className="text-lg md:text-xl font-semibold text-black">- Emily R.</h4>
             </div>
             <div className="p-4 md:p-6 bg-gradient-to-r from-red-200 via-yellow-300 to-lime-400 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl w-full md:w-1/3">
-              <p className="text-base md:text-lg text-black-700 mb-4">"The pet matching service was fantastic! We found the perfect cat for our family. Highly recommend!"</p>
+              <p className="text-base md:text-lg text-black-700 mb-4">&quot;The pet matching service was fantastic! We found the perfect cat for our family. Highly recommend!&quot;</p>
               <h4 className="text-lg md:text-xl font-semibold text-black">- John D.</h4>
             </div>
             <div className="p-4 md:p-6 bg-gradient-to-r from-red-200 via-yellow-300 to-lime-400 rounded-lg shadow-lg transform transition-transform hover:scale-105 hover:shadow-xl w-full md:w-1/3">
-              <p className="text-base md:text-lg text-black-700 mb-4">"Our puppy has settled in so well, thanks to the post-adoption support provided. We're so happy!"</p>
+              <p className="text-base md:text-lg text-black-700 mb-4">&quot;Our puppy has settled in so well, thanks to the post-adoption support provided. We&apos;re so happy!&quot;</p>
               <h4 className="text-lg md:text-xl font-semibold text-black">- Sarah K.</h4>
             </div>
           </div>

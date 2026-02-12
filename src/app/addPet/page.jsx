@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect } from 'react';
-import { IconSend, IconPaw } from '@tabler/icons-react';
+import { IconSend } from '@tabler/icons-react';
 import axios from 'axios';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,24 +12,25 @@ const validationSchema = Yup.object({
   breed: Yup.string().required('Pet breed is required'),
   type: Yup.string().required('Pet type is required'),
   gender: Yup.string().required('Pet gender is required'),
-  age: Yup.number().required('Pet age is required').positive('Age must be a positive number').integer('Age must be an integer'),
+  age: Yup.number().required('Pet age is required').positive().integer(),
   state: Yup.string().required('State is required'),
   contact_name: Yup.string().required('Contact name is required'),
-  phone: Yup.string().required('phone number is required'),
-  image: Yup.mixed().required('Image is required')
+  phone: Yup.string().required('Phone number is required'),
+  image: Yup.mixed().test(
+    'fileRequired',
+    'Image is required',
+    value => value instanceof File || typeof value === 'string'
+  )
 });
 
 const AddPetForm = () => {
-
   const router = useRouter();
 
-  // ✅ PAGE PROTECTION
+  // PAGE PROTECTION
   useEffect(() => {
     const token = localStorage.getItem('token');
-    if (!token) {
-      router.push('/login');
-    }
-  }, []);
+    if (!token) router.push('/login');
+  }, [router]);
 
   const formik = useFormik({
     initialValues: {
@@ -45,45 +46,36 @@ const AddPetForm = () => {
     validationSchema,
     onSubmit: async (values, { resetForm, setSubmitting }) => {
       try {
-
         const token = localStorage.getItem('token');
-
         if (!token) {
           toast.error('Please login first');
           router.push('/login');
           return;
         }
 
-        // Upload image if file
         if (values.image instanceof File) {
-          const imageFormData = new FormData();
-          imageFormData.append('file', values.image);
-          imageFormData.append('upload_preset', 'mypreset');
-          imageFormData.append('cloud_name', 'dmnl8ozex');
+          const formData = new FormData();
+          formData.append('file', values.image);
+          formData.append('upload_preset', 'mypreset');
+          formData.append('cloud_name', 'dmnl8ozex');
 
           const uploadResponse = await axios.post(
             'https://api.cloudinary.com/v1_1/dmnl8ozex/image/upload',
-            imageFormData,
+            formData,
             { headers: { 'Content-Type': 'multipart/form-data' } }
           );
 
           values.image = uploadResponse.data.secure_url;
         }
 
-        // ✅ SEND TOKEN IN HEADER
-        const response = await axios.post(
+        await axios.post(
           'https://pet-backend-9xvs.onrender.com/pet/add',
           values,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
+          { headers: { Authorization: `Bearer ${token}` } }
         );
 
         resetForm();
         toast.success('Pet added successfully');
-
       } catch (err) {
         console.error(err);
         toast.error(err.response?.data?.message || 'An error occurred');
@@ -94,10 +86,8 @@ const AddPetForm = () => {
   });
 
   const handleFileChange = (e) => {
-    const { files } = e.target;
-    if (files && files[0]) {
-      formik.setFieldValue('image', files[0]);
-    }
+    const file = e.target.files?.[0];
+    if (file) formik.setFieldValue('image', file);
   };
 
   return (
@@ -140,13 +130,16 @@ const AddPetForm = () => {
 
             <div>
               <label className='block text-gray-700 font-medium mb-1'>Gender</label>
-              <input
+              <select
                 name='gender'
-                type='text'
                 value={formik.values.gender}
                 onChange={formik.handleChange}
                 className='border rounded-lg w-full px-4 py-2'
-              />
+              >
+                <option value=''>Select Gender</option>
+                <option value='Male'>Male</option>
+                <option value='Female'>Female</option>
+              </select>
             </div>
 
             <div>

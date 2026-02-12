@@ -4,36 +4,12 @@ import axios from 'axios';
 import Link from 'next/link';
 
 const ExplorePets = () => {
-
   const indianStates = [
-    "Andhra Pradesh",
-    "Arunachal Pradesh",
-    "Assam",
-    "Bihar",
-    "Chhattisgarh",
-    "Goa",
-    "Gujarat",
-    "Haryana",
-    "Himachal Pradesh",
-    "Jharkhand",
-    "Karnataka",
-    "Kerala",
-    "Madhya Pradesh",
-    "Maharashtra",
-    "Manipur",
-    "Meghalaya",
-    "Mizoram",
-    "Nagaland",
-    "Odisha",
-    "Punjab",
-    "Rajasthan",
-    "Sikkim",
-    "Tamil Nadu",
-    "Telangana",
-    "Tripura",
-    "Uttar Pradesh",
-    "Uttarakhand",
-    "West Bengal"
+    "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh",
+    "Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand","Karnataka",
+    "Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram",
+    "Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana",
+    "Tripura","Uttar Pradesh","Uttarakhand","West Bengal"
   ];
 
   const [selectedType, setSelectedType] = useState('');
@@ -41,16 +17,15 @@ const ExplorePets = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [petList, setPetList] = useState([]);
 
-  const fetchPetsData = async () => {
-    try {
-      const res = await axios.get('https://pet-backend-9xvs.onrender.com/pet/getall');
-      setPetList(res.data);
-    } catch (error) {
-      console.error('Error fetching pets data:', error);
-    }
-  };
-
   useEffect(() => {
+    const fetchPetsData = async () => {
+      try {
+        const res = await axios.get('https://pet-backend-9xvs.onrender.com/pet/getall');
+        setPetList(res.data);
+      } catch (error) {
+        console.error('Error fetching pets data:', error);
+      }
+    };
     fetchPetsData();
   }, []);
 
@@ -61,13 +36,12 @@ const ExplorePets = () => {
   );
 
   return (
-    <div className="flex gap-6 p-6">
+    <div className="flex flex-col md:flex-row gap-6 p-6">
 
       {/* Filter Card */}
-      <div className="w-1/4 bg-white shadow-lg p-6 rounded-lg">
+      <div className="w-full md:w-1/4 bg-white shadow-lg p-6 rounded-lg">
         <h2 className="text-xl font-bold mb-4">Filter Pets</h2>
 
-        {/* Type Filter */}
         <div className="mb-4">
           <label className="block text-gray-700 mb-1">Type</label>
           <select
@@ -82,7 +56,6 @@ const ExplorePets = () => {
           </select>
         </div>
 
-        {/* State Filter */}
         <div className="mb-4">
           <label className="block text-gray-700 mb-1">State</label>
           <select
@@ -91,23 +64,17 @@ const ExplorePets = () => {
             className="border rounded w-full px-3 py-2"
           >
             <option value="">All States</option>
-            {indianStates.map((state, index) => (
-              <option key={index} value={state}>
-                {state}
-              </option>
+            {indianStates.map((state, idx) => (
+              <option key={idx} value={state}>{state}</option>
             ))}
           </select>
         </div>
       </div>
 
       {/* Pets Display */}
-      <div className="w-3/4">
-
-        {/* Search */}
+      <div className="w-full md:w-3/4">
         <div className="mb-6">
-          <label className="block text-black text-2xl font-bold mb-2">
-            Search by Breed
-          </label>
+          <label className="block text-black text-2xl font-bold mb-2">Search by Breed</label>
           <input
             type="text"
             value={searchTerm}
@@ -120,12 +87,12 @@ const ExplorePets = () => {
         <h2 className="text-2xl font-bold mb-6">Available Pets</h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPets.length > 0 ? (
+          {filteredPets.length ? (
             filteredPets.map((pet) => (
               <div key={pet._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
                 <img
-                  src={pet.image}
-                  alt={pet.breed}
+                  src={pet.image || 'https://via.placeholder.com/300x200?text=No+Image'}
+                  alt={pet.breed || 'Pet'}
                   className="w-full h-48 object-cover"
                 />
                 <div className="p-4">
@@ -133,10 +100,7 @@ const ExplorePets = () => {
                   <p className="text-gray-600">Type: {pet.type}</p>
                   <p className="text-gray-600">State: {pet.state}</p>
                   <div className="mt-4 text-center">
-                    <Link
-                      href={`/pet-details/${pet._id}`}
-                      className="text-lime-500 hover:underline text-sm"
-                    >
+                    <Link href={`/pet-details/${pet._id}`} className="text-lime-500 hover:underline text-sm">
                       View Details
                     </Link>
                   </div>
