@@ -27,70 +27,88 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="flex flex-wrap md:justify-start md:flex-nowrap z-50 w-full py-7 bg-white">
-        <nav className="relative w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-2 md:px-2 lg:px-4 mx-auto">
-          
-          {/* Logo */}
-          <div className="md:col-span-4">
-            <Link href="/" className="flex-none rounded-xl text-xl inline-block font-semibold">
-              <div className='flex justify-align'>
-                <img src="/logo.png" alt="Logo" className="h-10 w-auto mr-3" />
+    <header className="w-full py-4 bg-white shadow-md">
+  <nav className="max-w-7xl mx-auto px-4 flex items-center justify-between">
 
-                <span className="text-2xl font-bold text-lime-500 my-8">
-                  WaggingTails Hub
-                </span>
-              </div>
-            </Link>
-          </div>
+    {/* Logo */}
+    <Link href="/" className="flex items-center gap-2">
+      <img src="/logo.png" alt="Logo" className="h-8 md:h-10 w-auto" />
+      <span className="text-lg md:text-2xl font-bold text-lime-500">
+        WaggingTails Hub
+      </span>
+    </Link>
 
-          {/* Menu */}
-          <div className="hidden md:flex md:items-center md:col-span-5">
-            <ul className="flex space-x-8 text-center">
-              <li><Link href="/explorePets" className="text-black text-xl font-bold">Pet Catalog</Link></li>
-              <li><Link href="/addPet" className="text-black font-bold text-xl">Pet Addition</Link></li>
-              <li><Link href="/" className="text-black font-bold text-xl">Home</Link></li>
-              <li><Link href="/aboutUs" className="text-black font-bold text-xl">About Us</Link></li>
-              <li><Link href="/contact" className="text-black font-bold text-xl">Contact</Link></li>
-            </ul>
-          </div>
+    {/* Desktop Menu */}
+    <div className="hidden md:flex items-center gap-8">
+      <Link href="/explorePets" className="font-bold">Pet Catalog</Link>
+      <Link href="/addPet" className="font-bold">Pet Addition</Link>
+      <Link href="/" className="font-bold">Home</Link>
+      <Link href="/aboutUs" className="font-bold">About Us</Link>
+      <Link href="/contact" className="font-bold">Contact</Link>
+    </div>
 
-          {/* RIGHT SIDE BUTTONS */}
-          <div className="flex items-center gap-x-3 ms-auto md:col-span-3">
+    {/* Right Buttons */}
+    <div className="hidden md:flex items-center gap-3">
+      {user ? (
+        <>
+          <span className="font-semibold">Hello, {user.name}</span>
+          <button
+            onClick={handleLogout}
+            className="py-2 px-3 rounded-xl bg-red-500 text-white"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link href="/signup" className="py-2 px-3 rounded-xl bg-black text-lime-400">
+            Sign Up
+          </Link>
+          <Link href="/login" className="py-2 px-3 rounded-xl bg-lime-400">
+            Login
+          </Link>
+        </>
+      )}
+    </div>
 
-            {user ? (
-              <>
-                <span className="text-black font-semibold text-lg">
-                  Hello, {user.name}
-                </span>
+    {/* Mobile Hamburger */}
+    <button
+      className="md:hidden text-2xl"
+      onClick={() => setIsOpen(!isOpen)}
+    >
+      ☰
+    </button>
+  </nav>
 
-                <button
-                  onClick={handleLogout}
-                  className="py-2 px-3 rounded-xl bg-red-500 text-white hover:bg-red-600 transition"
-                >
-                  Logout
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  href="/signup"
-                  className="py-2 px-3 font-medium rounded-xl bg-black text-lime-400 hover:bg-lime-500 hover:text-white transition"
-                >
-                  Sign Up
-                </Link>
+  {/* Mobile Menu */}
+  {isOpen && (
+    <div className="md:hidden px-4 pb-4 flex flex-col gap-4 bg-white shadow-md">
+      <Link href="/explorePets">Pet Catalog</Link>
+      <Link href="/addPet">Pet Addition</Link>
+      <Link href="/">Home</Link>
+      <Link href="/aboutUs">About Us</Link>
+      <Link href="/contact">Contact</Link>
 
-                <Link
-                  href="/login"
-                  className="py-2 px-3 font-medium rounded-xl bg-lime-400 text-black hover:bg-lime-500 transition"
-                >
-                  Login
-                </Link>
-              </>
-            )}
+      {user ? (
+        <>
+          <span>Hello, {user.name}</span>
+          <button
+            onClick={handleLogout}
+            className="py-2 px-3 rounded-xl bg-red-500 text-white"
+          >
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link href="/signup">Sign Up</Link>
+          <Link href="/login">Login</Link>
+        </>
+      )}
+    </div>
+  )}
+</header>
 
-          </div>
-        </nav>
-      </header>
     </>
   );
 };
