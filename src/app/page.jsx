@@ -76,7 +76,8 @@ const Home = () => {
               INTRODUCE A PET
             </h1>
             <p className="text-sm sm:text-base md:text-xl mb-6 text-black">
-              "Give them a chance to find their forever home!"
+              &quot;Give them a chance to find their forever home!&quot;
+
             </p>
             <Link href="/addPet"
               className="bg-white text-black px-6 py-3 rounded-lg shadow-lg hover:bg-lime-600 transition">
@@ -93,6 +94,7 @@ const Home = () => {
             Our Services
           </h2>
 
+
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div className="p-6 bg-gradient-to-r from-green-200 via-lime-300 to-yellow-200 rounded-lg shadow-lg transform transition hover:scale-105 hover:shadow-xl">
               <h3 className="text-xl md:text-2xl font-bold mb-4 text-black">Adoption Assistance</h3>
@@ -104,7 +106,8 @@ const Home = () => {
             <div className="p-6 bg-gradient-to-r from-green-200 via-lime-300 to-yellow-200 rounded-lg shadow-lg transform transition hover:scale-105 hover:shadow-xl">
               <h3 className="text-xl md:text-2xl font-bold mb-4 text-black">Pet Matching</h3>
               <p className="text-sm md:text-base text-black">
-                We'll help you find the perfect pet that fits your lifestyle and needs.
+               We&apos;ll help you find the perfect pet that fits your lifestyle and needs.
+
               </p>
             </div>
 
@@ -130,11 +133,13 @@ const Home = () => {
           </h1>
           <p className="text-sm sm:text-base md:text-lg mb-6">
             Approximately 1478 dogs & cats die every day on roads in India.
-            Let's start a mission to provide every dog and cat a home before 2035.
+            Let&apos;s start a mission to provide every dog and cat a home before 2035.
+
           </p>
           <a href="/explorePets"
             className="inline-block bg-orange-500 text-white px-6 py-3 rounded-lg shadow-lg hover:bg-orange-600 transition">
-            Adopt, Don't Shop!
+           Don&apos;t Shop!
+
           </a>
         </div>
       </section>
@@ -149,7 +154,8 @@ const Home = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
             <div className="p-6 bg-gradient-to-r from-red-200 via-yellow-300 to-lime-400 rounded-lg shadow-lg hover:scale-105 transition">
               <p className="text-sm md:text-base text-black mb-4">
-                "Adopting our dog through this service was a wonderful experience."
+                &quot;Adopting our dog through this service was a wonderful experience.&quot;
+
               </p>
               <h4 className="text-base md:text-lg font-semibold text-black">
                 - Emily R.
@@ -158,7 +164,8 @@ const Home = () => {
 
             <div className="p-6 bg-gradient-to-r from-red-200 via-yellow-300 to-lime-400 rounded-lg shadow-lg hover:scale-105 transition">
               <p className="text-sm md:text-base text-black mb-4">
-                "The pet matching service was fantastic!"
+                &quot;The pet matching service was fantastic!&quot;
+
               </p>
               <h4 className="text-base md:text-lg font-semibold text-black">
                 - John D.
@@ -167,7 +174,8 @@ const Home = () => {
 
             <div className="p-6 bg-gradient-to-r from-red-200 via-yellow-300 to-lime-400 rounded-lg shadow-lg hover:scale-105 transition">
               <p className="text-sm md:text-base text-black mb-4">
-                "Our puppy has settled in so well!"
+                &quot;Our puppy has settled in so well!&quot;
+
               </p>
               <h4 className="text-base md:text-lg font-semibold text-black">
                 - Sarah K.
